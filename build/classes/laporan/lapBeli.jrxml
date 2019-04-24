@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b9929a21-9e36-438e-b393-8248ff4c002a">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="95"/>
+	<property name="ireport.y" value="3"/>
+	<parameter name="tglAwal" class="java.lang.String"/>
+	<parameter name="tglAkhir" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     transbeli.tglTrans AS " Tanggal",
+     transbeli.noTrans AS "No. Transaksi",
+     supplier.nmSup AS "Nama Supplier",
+     transbeli.subTtl AS "Sub Total",
+     transbeli.disc AS "Diskon",
+     transbeli.ttlHarga AS "Total Harga"
+FROM
+     supplier INNER JOIN transbeli on supplier.idSup=transbeli.idSup
+     AND transbeli.tglTrans BETWEEN $P{tglAwal} AND $P{tglAkhir} GROUP BY supplier.idSup;]]>
+	</queryString>
+	<field name="Tanggal" class="java.sql.Date"/>
+	<field name="No. Transaksi" class="java.lang.String"/>
+	<field name="Nama Supplier" class="java.lang.String"/>
+	<field name="Sub Total" class="java.lang.Integer"/>
+	<field name="Diskon" class="java.lang.Integer"/>
+	<field name="Total Harga" class="java.lang.Integer"/>
+	<variable name="grand_total" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{Total Harga}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="27" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="27" uuid="a6221451-7b51-4360-af81-8ca50ffeec29"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LAPORAN PEMBELIAN BARANG]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement x="188" y="0" width="48" height="12" uuid="3894885a-d825-4759-9bb3-91dae7d84a37"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Periode :]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="231" y="0" width="52" height="12" uuid="ea15d3bb-70a1-4e7c-bd83-04af7be0c603"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tglAwal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="290" y="0" width="24" height="12" uuid="fd75d34d-aa7e-47be-ae56-585e12fa4b66"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[s/d]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="312" y="0" width="55" height="12" uuid="6e0eceb4-37da-458d-a5d3-dfca1b79334a"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tglAkhir}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="29" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="25" width="555" height="1" uuid="925bf3c9-c2fd-4111-a1f0-2c9e189b6d85"/>
+			</line>
+			<line>
+				<reportElement x="0" y="3" width="555" height="1" uuid="b562ca68-d677-49ab-9792-d99572800bc8"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="9" width="62" height="20" uuid="49135606-a6e3-42b4-bf13-5adbe746c349"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tanggal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="88" y="9" width="75" height="20" uuid="724392a8-78fc-46d0-b48e-d9f3fa77eafa"/>
+				<textElement textAlignment="Left">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[No. Transaksi]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="173" y="9" width="87" height="20" uuid="9e2fa451-af66-40a7-90a3-51cc107c8b99"/>
+				<textElement textAlignment="Left">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nama Supplier]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="313" y="9" width="55" height="20" uuid="b11c8556-30a3-4148-ab9f-86eff5345646"/>
+				<textElement textAlignment="Left">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sub Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="409" y="9" width="39" height="20" uuid="8b5d5869-4b50-43c4-8061-e41d1dee1b00"/>
+				<textElement textAlignment="Left">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Diskon]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="482" y="9" width="73" height="20" uuid="bf0ff7a5-79af-42b2-9545-748a4ddc3463"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Harga]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="0" y="4" width="76" height="20" uuid="4adc2571-a26a-4f73-9887-c17af554d559"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Tanggal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="88" y="4" width="75" height="20" uuid="bec01380-0a29-457d-bd88-1de95106b1a6"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{No. Transaksi}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="173" y="4" width="128" height="20" uuid="466b16a5-1bfa-4774-8921-faef40a62b7f"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Nama Supplier}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="301" y="4" width="67" height="20" uuid="6f84f22a-5719-451f-b056-04e001febbbc"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Sub Total}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0 %">
+				<reportElement x="409" y="4" width="39" height="20" uuid="748dc171-26e5-4ecf-9ef5-8cd2a1b78848"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Diskon}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="482" y="4" width="73" height="20" uuid="de74ade6-5bbb-47a8-b0b9-f80b74a04606"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Total Harga}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="32" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="3" width="555" height="1" uuid="211624fa-4768-482d-bcf6-d7cea5307583"/>
+			</line>
+			<staticText>
+				<reportElement x="401" y="8" width="81" height="18" uuid="3d22f2f9-7a51-4b33-8621-acc82ac26e8e"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GRAND TOTAL]]></text>
+			</staticText>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="482" y="8" width="73" height="18" uuid="a9a267cc-66ff-4547-98b2-4c9dab286cbe"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{grand_total}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="388" y="26" width="167" height="1" uuid="3a01c087-4379-4f55-989e-4cf01a9c5e21"/>
+			</line>
+			<line>
+				<reportElement x="388" y="4" width="1" height="22" uuid="2d83b26a-0317-480d-907d-f18ab4819743"/>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

