@@ -84,6 +84,7 @@ CREATE TABLE IF NOT EXISTS `dtltransjual` (
   `hrgDiskon` int(8) NOT NULL,
   `jumlah` int(4) NOT NULL,
   `jlhHarga` int(9) NOT NULL,
+  `laba` int(9) DEFAULT NULL,
   PRIMARY KEY (`noTrans`,`kdBrg`),
   KEY `kdBrg` (`kdBrg`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
